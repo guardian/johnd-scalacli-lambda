@@ -11,14 +11,11 @@ deployments:
       templateStagePaths:
         CODE: JohndLambda-euwest-1-CODE.template.json
       cloudFormationStackName: johnd-lambda
-      cloudFormationStackByTags: false
-      prependStackToCloudFormationStackName: false
-      createStackIfAbsent: true
   johnd-lambda:
     type: aws-lambda
     parameters:
       bucketSsmLookup: true
-      functionNames: [johnd-lambda-]
+      lookupByTags: true
       fileName: johnd-lambda.jar
       prefixStack: false
     dependencies: [cfn]

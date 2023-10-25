@@ -20,6 +20,7 @@ export class JohndLambda extends GuStack {
         id: "johnd-lambda-api",
         description: "This is an example API",
       },
+      functionName: `johnd-lambda-${this.stage}`,
     });
 
   }
