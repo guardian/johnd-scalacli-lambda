@@ -38,7 +38,9 @@ jobs:
         uses: coursier/cache-action@v6.3
 
       - name: install scala-cli
-        uses: VirtusLab/scala-cli-setup@v0.1
+        uses: VirtusLab/scala-cli-setup@main
+        with:
+          jvm: adopt:17
 
       - name: Test project
         run: scala-cli test scala
@@ -57,5 +59,5 @@ jobs:
           contentDirectories: |
             cfn:
               - ./cfn.yaml
-            salesforce-message-handler:
+            johnd-lambda:
               - ./lambda.jar
