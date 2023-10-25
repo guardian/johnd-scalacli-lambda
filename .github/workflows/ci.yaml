@@ -37,7 +37,7 @@ jobs:
         run: scala-cli test scala
 
       - name: Compile and package project
-        run: scala-cli --power package scala -o lambda.jar --assembly --preamble=false --force
+        run: scala-cli --power package scala -o johnd-lambda.jar --assembly --preamble=false --force
 
       - name: Generate CFN templates from GuCDK
         run: bash ./generate-cfn.sh
