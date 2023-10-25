@@ -5,7 +5,7 @@ allowedStages:
   - CODE
 
 deployments:
-  cfn:
+  johnd-lambda-cfn:
     type: cloud-formation
     parameters:
       templateStagePaths:
