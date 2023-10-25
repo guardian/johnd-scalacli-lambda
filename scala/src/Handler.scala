@@ -5,23 +5,30 @@
 import com.amazonaws.services.lambda.runtime.events.{APIGatewayProxyRequestEvent, APIGatewayProxyResponseEvent}
 import com.amazonaws.services.lambda.runtime.{ClientContext, CognitoIdentity, Context, LambdaLogger, RequestHandler}
 import scala.jdk.CollectionConverters.*
+import upickle.default.*
 
 @main
-def main():Unit =
-  val jsonString = """{"name": "Peter", "age": 13, "pets": ["Toolkitty", "Scaniel"]}"""
-  val json: ujson.Value  = ujson.read(jsonString)
-  println(json("name").str)
+def main(): Unit =
   val testInput = new APIGatewayProxyRequestEvent()
-    .withBody("cheese")
+    .withBody("""{"name":"bodyJohn"}""")
+    .withHeaders(Map("name" -> "headerJohn").asJava)
   println(Handler.handleRequest(testInput, dummyContext))
 
 object Handler extends RequestHandler[APIGatewayProxyRequestEvent, APIGatewayProxyResponseEvent]:
   override def handleRequest(input: APIGatewayProxyRequestEvent, context: Context): APIGatewayProxyResponseEvent =
+    val parsedInput = read[HandlerRequest](input.getBody)
+    val response = handle(input.getHeaders.asScala.toMap, parsedInput)
+    val output = write(response)
     new APIGatewayProxyResponseEvent()
       .withStatusCode(200)
-      .withHeaders(Map("Content-type" -> "text/plain").asJava)
-      .withBody("Hello " + input.getBody)
+      .withHeaders(Map("Content-type" -> "application/json").asJava)
+      .withBody(output)
 
+  def handle(headers: Map[String, String], handlerRequest: HandlerRequest): HandlerResponse =
+    HandlerResponse("Hello " + headers.get("name") + " and " + handlerRequest.name)
+
+case class HandlerResponse(message: String) derives ReadWriter
+case class HandlerRequest(name: String) derives ReadWriter
 
 val dummyContext = new Context() {
   override def getAwsRequestId: String = ???
