@@ -1,4 +1,4 @@
-name: Build salesforce-message-handler
+name: Build johnd-lambda
 
 on:
   pull_request:
@@ -12,7 +12,7 @@ jobs:
     permissions:
       id-token: write
       contents: read
-    name: salesforce-message-handler build
+    name: johnd-lambda build
     runs-on: ubuntu-latest
     steps:
       - name: Env
@@ -32,7 +32,7 @@ jobs:
         with:
           distribution: 'corretto'
           java-version: '17'
-          cache: 'sbt'
+#          cache: 'sbt' TODO
 
       - name: Compile and package project
         run: scala-cli --power package . -o lambda.jar --assembly --preamble=false --force
