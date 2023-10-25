@@ -25,10 +25,29 @@ object Handler extends RequestHandler[APIGatewayProxyRequestEvent, APIGatewayPro
       .withBody(output)
 
   def handle(headers: Map[String, String], handlerRequest: HandlerRequest): HandlerResponse =
-    HandlerResponse("Hello " + headers.get("name") + " and " + handlerRequest.name)
+    val user = GetUser.response()
+    HandlerResponse("Hello " + headers.get("name") + " and " + handlerRequest.name + " date was " + user.date_of_birth)
 
 case class HandlerResponse(message: String) derives ReadWriter
 case class HandlerRequest(name: String) derives ReadWriter
+
+import sttp.client4.quick.*
+import sttp.client4.Response
+object GetUser {
+
+  def main(args: Array[String]): Unit = {
+    println("respnse is: " + response())
+  }
+
+  case class UserResponse(date_of_birth: String) derives ReadWriter
+
+  def response(): UserResponse =
+    val res = quickRequest
+      .get(uri"https://random-data-api.com/api/v2/users")
+      .send()
+    read[UserResponse](res.body)
+
+}
 
 val dummyContext = new Context() {
   override def getAwsRequestId: String = ???
