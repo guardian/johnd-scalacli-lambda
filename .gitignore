@@ -1,5 +1,5 @@
-/.bsp/
+.bsp/
 /.idea
-/.scala-build
+.scala-build
 target
 lambda.jar
