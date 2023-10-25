@@ -1,6 +1,9 @@
 stacks: [playground]
 regions: [eu-west-1]
 
+allowedStages:
+  - CODE
+
 deployments:
   cfn:
     type: cloud-formation
@@ -10,7 +13,7 @@ deployments:
       cloudFormationStackName: johnd-lambda
       cloudFormationStackByTags: false
       prependStackToCloudFormationStackName: false
-      createStackIfAbsent: false
+      createStackIfAbsent: true
   lambda:
     type: aws-lambda
     parameters:
