@@ -48,7 +48,7 @@ jobs:
           app: johnd-lambda
           configPath: ./riff-raff.yaml
           contentDirectories: |
-            cfn:
+            johnd-lambda-cfn:
               - ./cdk/cdk.out/JohndLambda-euwest-1-CODE.template.json
             johnd-lambda:
               - ./johnd-lambda.jar
