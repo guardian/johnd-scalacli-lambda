@@ -6,8 +6,7 @@ deployments:
     type: cloud-formation
     parameters:
       templateStagePaths:
-        CODE: johnd-lambda-CODE.template.json
-        PROD: johnd-lambda-PROD.template.json
+        CODE: JohndLambda-euwest-1-CODE.template.json
       cloudFormationStackName: johnd-lambda
       cloudFormationStackByTags: false
       prependStackToCloudFormationStackName: false
