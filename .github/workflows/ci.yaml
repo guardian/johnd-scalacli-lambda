@@ -1,0 +1,52 @@
+name: Build salesforce-message-handler
+
+on:
+  pull_request:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  CI:
+    permissions:
+      id-token: write
+      contents: read
+    name: salesforce-message-handler build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Env
+        run: env
+
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-region: eu-west-1
+          role-to-assume: ${{ secrets.GU_RIFF_RAFF_ROLE_ARN }}
+
+      - name: Setup Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'corretto'
+          java-version: '17'
+          cache: 'sbt'
+
+      - name: Compile and package project
+        run: scala-cli --power package . -o lambda.jar --assembly --preamble=false --force
+
+      - name: Generate CFN templates from GuCDK
+        run: bash ./script/cfn.sh
+
+      - name: Upload to Riff-Raff
+        uses: guardian/actions-riff-raff@v2
+        with:
+          app: johnd-lambda
+          configPath: ./riff-raff.yaml
+          contentDirectories: |
+            cfn:
+              - ./cfn.yaml
+            salesforce-message-handler:
+              - ./lambda.jar
