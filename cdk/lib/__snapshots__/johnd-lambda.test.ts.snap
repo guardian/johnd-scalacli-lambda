@@ -83,6 +83,10 @@ exports[`The JohndLambda stack matches the snapshot 1`] = `
             "Value": "TEST",
           },
           {
+            "Key": "gu:repo",
+            "Value": "guardian/johnd-scalacli-lambda",
+          },
+          {
             "Key": "Stack",
             "Value": "playground",
           },
@@ -233,6 +237,10 @@ exports[`The JohndLambda stack matches the snapshot 1`] = `
             "Value": "TEST",
           },
           {
+            "Key": "gu:repo",
+            "Value": "guardian/johnd-scalacli-lambda",
+          },
+          {
             "Key": "Stack",
             "Value": "playground",
           },
@@ -256,6 +264,10 @@ exports[`The JohndLambda stack matches the snapshot 1`] = `
           {
             "Key": "gu:cdk:version",
             "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/johnd-scalacli-lambda",
           },
           {
             "Key": "Stack",
@@ -445,6 +457,10 @@ exports[`The JohndLambda stack matches the snapshot 1`] = `
             "Value": "TEST",
           },
           {
+            "Key": "gu:repo",
+            "Value": "guardian/johnd-scalacli-lambda",
+          },
+          {
             "Key": "Stack",
             "Value": "playground",
           },
@@ -457,7 +473,7 @@ exports[`The JohndLambda stack matches the snapshot 1`] = `
       "Type": "AWS::IAM::Role",
       "UpdateReplacePolicy": "Retain",
     },
-    "mylambdajohndlambdaapiDeployment7FEB2ACF434752f4eae15fc53c8302a48c3c531d": {
+    "mylambdajohndlambdaapiDeployment7FEB2ACFdbd6058dddc2d011d752f72bcc339d12": {
       "DependsOn": [
         "mylambdajohndlambdaapiproxyANY96FE1B08",
         "mylambdajohndlambdaapiproxyAC91C370",
@@ -477,7 +493,7 @@ exports[`The JohndLambda stack matches the snapshot 1`] = `
       ],
       "Properties": {
         "DeploymentId": {
-          "Ref": "mylambdajohndlambdaapiDeployment7FEB2ACF434752f4eae15fc53c8302a48c3c531d",
+          "Ref": "mylambdajohndlambdaapiDeployment7FEB2ACFdbd6058dddc2d011d752f72bcc339d12",
         },
         "RestApiId": {
           "Ref": "mylambdajohndlambdaapi14D1279D",
@@ -491,6 +507,10 @@ exports[`The JohndLambda stack matches the snapshot 1`] = `
           {
             "Key": "gu:cdk:version",
             "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/johnd-scalacli-lambda",
           },
           {
             "Key": "Stack",
