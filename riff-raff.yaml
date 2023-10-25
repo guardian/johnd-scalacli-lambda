@@ -5,7 +5,9 @@ deployments:
   cfn:
     type: cloud-formation
     parameters:
-      templatePath: cfn.yaml
+      templateStagePaths:
+        CODE: johnd-lambda-CODE.template.json
+        PROD: johnd-lambda-PROD.template.json
       cloudFormationStackName: johnd-lambda
       cloudFormationStackByTags: false
       prependStackToCloudFormationStackName: false

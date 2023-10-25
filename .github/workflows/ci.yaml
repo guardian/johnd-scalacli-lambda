@@ -49,6 +49,7 @@ jobs:
           configPath: ./riff-raff.yaml
           contentDirectories: |
             cfn:
-              - ./cfn.yaml
+              - johnd-lambda-CODE.template.json
+              - johnd-lambda-PROD.template.json
             johnd-lambda:
               - ./lambda.jar
