@@ -64,6 +64,7 @@ exports[`The JohndLambda stack matches the snapshot 1`] = `
             "STAGE": "TEST",
           },
         },
+        "FunctionName": "johnd-lambda-TEST",
         "Handler": "Handler::handleRequest",
         "MemorySize": 1024,
         "Role": {
@@ -473,7 +474,7 @@ exports[`The JohndLambda stack matches the snapshot 1`] = `
       "Type": "AWS::IAM::Role",
       "UpdateReplacePolicy": "Retain",
     },
-    "mylambdajohndlambdaapiDeployment7FEB2ACFdbd6058dddc2d011d752f72bcc339d12": {
+    "mylambdajohndlambdaapiDeployment7FEB2ACF208dba1e1bbd342ce11890e6bd05d714": {
       "DependsOn": [
         "mylambdajohndlambdaapiproxyANY96FE1B08",
         "mylambdajohndlambdaapiproxyAC91C370",
@@ -493,7 +494,7 @@ exports[`The JohndLambda stack matches the snapshot 1`] = `
       ],
       "Properties": {
         "DeploymentId": {
-          "Ref": "mylambdajohndlambdaapiDeployment7FEB2ACFdbd6058dddc2d011d752f72bcc339d12",
+          "Ref": "mylambdajohndlambdaapiDeployment7FEB2ACF208dba1e1bbd342ce11890e6bd05d714",
         },
         "RestApiId": {
           "Ref": "mylambdajohndlambdaapi14D1279D",
