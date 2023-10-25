@@ -40,7 +40,7 @@ jobs:
       - name: install scala-cli
         uses: VirtusLab/scala-cli-setup@main
         with:
-          jvm: adopt:17
+          jvm: adopt:14
 
       - name: Test project
         run: scala-cli test scala
