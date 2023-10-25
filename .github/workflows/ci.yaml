@@ -51,4 +51,4 @@ jobs:
             cfn:
               - ./cdk/cdk.out/JohndLambda-euwest-1-CODE.template.json
             johnd-lambda:
-              - ./lambda.jar
+              - ./johnd-lambda.jar

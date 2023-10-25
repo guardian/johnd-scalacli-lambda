@@ -14,11 +14,11 @@ deployments:
       cloudFormationStackByTags: false
       prependStackToCloudFormationStackName: false
       createStackIfAbsent: true
-  lambda:
+  johnd-lambda:
     type: aws-lambda
     parameters:
       bucketSsmLookup: true
       functionNames: [johnd-lambda-]
-      fileName: lambda.jar
+      fileName: johnd-lambda.jar
       prefixStack: false
     dependencies: [cfn]
