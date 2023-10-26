@@ -5,7 +5,12 @@ import { JohndLambda } from "./johnd-lambda";
 describe("The JohndLambda stack", () => {
   it("matches the snapshot", () => {
     const app = new App();
-    const stack = new JohndLambda(app, "JohndLambda", { stack: "playground", stage: "TEST" });
+    const stack = new JohndLambda(
+        app,
+        "JohndLambda",
+        { stack: "playground", stage: "TEST" },
+        "DEVDEV"
+    );
     const template = Template.fromStack(stack);
     expect(template.toJSON()).toMatchSnapshot();
   });

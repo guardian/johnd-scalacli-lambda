@@ -37,7 +37,7 @@ jobs:
         run: scala-cli test scala
 
       - name: Compile and package project
-        run: scala-cli --power package scala -o johnd-lambda.jar --assembly --preamble=false --force
+        run: scala-cli --power package scala -o johnd-lambda-${{ github.run_number }}.jar --assembly --preamble=false --force
 
       - name: Generate CFN templates from GuCDK
         run: bash ./generate-cfn.sh
@@ -46,9 +46,31 @@ jobs:
         uses: guardian/actions-riff-raff@v2
         with:
           app: johnd-lambda
-          configPath: ./riff-raff.yaml
+          config: |
+            stacks: [playground]
+            regions: [eu-west-1]
+
+            allowedStages:
+              - CODE
+
+            deployments:
+              johnd-lambda-cfn:
+                type: cloud-formation
+                parameters:
+                  templateStagePaths:
+                    CODE: JohndLambda-euwest-1-CODE.template.json
+                  cloudFormationStackName: johnd-lambda
+              johnd-lambda:
+                type: aws-lambda
+                parameters:
+                  bucketSsmLookup: true
+                  functionNames: [johnd-lambda-]
+                  fileName: johnd-lambda-${{ github.run_number }}.jar
+                  prefixStack: false
+                dependencies: [johnd-lambda-cfn]
+
           contentDirectories: |
             johnd-lambda-cfn:
               - ./cdk/cdk.out/JohndLambda-euwest-1-CODE.template.json
             johnd-lambda:
-              - ./johnd-lambda.jar
+              - ./johnd-lambda-${{ github.run_number }}.jar

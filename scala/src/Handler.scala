@@ -7,13 +7,6 @@ import com.amazonaws.services.lambda.runtime.{ClientContext, CognitoIdentity, Co
 import scala.jdk.CollectionConverters.*
 import upickle.default.*
 
-@main
-def main(): Unit =
-  val testInput = new APIGatewayProxyRequestEvent()
-    .withBody("""{"name":"bodyJohn"}""")
-    .withHeaders(Map("name" -> "headerJohn").asJava)
-  println(Handler.handleRequest(testInput, dummyContext))
-
 object Handler extends RequestHandler[APIGatewayProxyRequestEvent, APIGatewayProxyResponseEvent]:
   override def handleRequest(input: APIGatewayProxyRequestEvent, context: Context): APIGatewayProxyResponseEvent =
     val parsedInput = read[HandlerRequest](input.getBody)
@@ -29,46 +22,5 @@ object Handler extends RequestHandler[APIGatewayProxyRequestEvent, APIGatewayPro
     HandlerResponse("Hello " + headers.get("name") + " and " + handlerRequest.name + " date was " + user.date_of_birth)
 
 case class HandlerResponse(message: String) derives ReadWriter
+
 case class HandlerRequest(name: String) derives ReadWriter
-
-import sttp.client4.quick.*
-import sttp.client4.Response
-object GetUser {
-
-  def main(args: Array[String]): Unit = {
-    println("respnse is: " + response())
-  }
-
-  case class UserResponse(date_of_birth: String) derives ReadWriter
-
-  def response(): UserResponse =
-    val res = quickRequest
-      .get(uri"https://random-data-api.com/api/v2/users")
-      .send()
-    read[UserResponse](res.body)
-
-}
-
-val dummyContext = new Context() {
-  override def getAwsRequestId: String = ???
-
-  override def getLogGroupName: String = ???
-
-  override def getLogStreamName: String = ???
-
-  override def getFunctionName: String = ???
-
-  override def getFunctionVersion: String = ???
-
-  override def getInvokedFunctionArn: String = ???
-
-  override def getIdentity: CognitoIdentity = ???
-
-  override def getClientContext: ClientContext = ???
-
-  override def getRemainingTimeInMillis: Int = ???
-
-  override def getMemoryLimitInMB: Int = ???
-
-  override def getLogger: LambdaLogger = ???
-}
