@@ -46,31 +46,9 @@ jobs:
         uses: guardian/actions-riff-raff@v2
         with:
           app: johnd-lambda
-          config: |
-            stacks: [playground]
-            regions: [eu-west-1]
-
-            allowedStages:
-              - CODE
-
-            deployments:
-              johnd-lambda-cfn:
-                type: cloud-formation
-                parameters:
-                  templateStagePaths:
-                    CODE: JohndLambda-euwest-1-CODE.template.json
-                  cloudFormationStackName: johnd-lambda
-              johnd-lambda:
-                type: aws-lambda
-                parameters:
-                  bucketSsmLookup: true
-                  functionNames: [johnd-lambda-]
-                  fileName: johnd-lambda-${{ github.run_number }}.jar
-                  prefixStack: false
-                dependencies: [johnd-lambda-cfn]
-
+          configPath: ./cdk/cdk.out/riff-raff.yaml
           contentDirectories: |
-            johnd-lambda-cfn:
+            cfn-eu-west-1-playground-johnd-lambda:
               - ./cdk/cdk.out/JohndLambda-euwest-1-CODE.template.json
-            johnd-lambda:
+            lambda-upload-eu-west-1-playground-johnd-lambda:
               - ./johnd-lambda-${{ github.run_number }}.jar
