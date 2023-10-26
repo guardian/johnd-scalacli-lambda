@@ -45,6 +45,29 @@ exports[`The JohndLambda stack matches the snapshot 1`] = `
     },
   },
   "Resources": {
+    "mylambdaAliasForLambdaEFAB1AEA": {
+      "Properties": {
+        "FunctionName": {
+          "Ref": "mylambdaE03B2284",
+        },
+        "FunctionVersion": {
+          "Fn::GetAtt": [
+            "mylambdaCurrentVersion363EBCB7f50075a10027b74fe9f32c258d7a8edb",
+            "Version",
+          ],
+        },
+        "Name": "TEST",
+      },
+      "Type": "AWS::Lambda::Alias",
+    },
+    "mylambdaCurrentVersion363EBCB7f50075a10027b74fe9f32c258d7a8edb": {
+      "Properties": {
+        "FunctionName": {
+          "Ref": "mylambdaE03B2284",
+        },
+      },
+      "Type": "AWS::Lambda::Version",
+    },
     "mylambdaE03B2284": {
       "DependsOn": [
         "mylambdaServiceRoleDefaultPolicyBDADF1CE",
@@ -55,7 +78,7 @@ exports[`The JohndLambda stack matches the snapshot 1`] = `
           "S3Bucket": {
             "Ref": "DistributionBucketName",
           },
-          "S3Key": "playground/TEST/johnd-lambda/johnd-lambda.jar",
+          "S3Key": "playground/TEST/johnd-lambda/johnd-lambda-DEVDEV.jar",
         },
         "Environment": {
           "Variables": {
@@ -74,6 +97,9 @@ exports[`The JohndLambda stack matches the snapshot 1`] = `
           ],
         },
         "Runtime": "java17",
+        "SnapStart": {
+          "ApplyOn": "PublishedVersions",
+        },
         "Tags": [
           {
             "Key": "App",
@@ -139,7 +165,7 @@ exports[`The JohndLambda stack matches the snapshot 1`] = `
                       {
                         "Ref": "DistributionBucketName",
                       },
-                      "/playground/TEST/johnd-lambda/johnd-lambda.jar",
+                      "/playground/TEST/johnd-lambda/johnd-lambda-DEVDEV.jar",
                     ],
                   ],
                 },
@@ -255,7 +281,7 @@ exports[`The JohndLambda stack matches the snapshot 1`] = `
     },
     "mylambdajohndlambdaapi14D1279D": {
       "Properties": {
-        "Description": "This is an example API",
+        "Description": "This is an example AAAAPI DEVDEV",
         "Name": "playground-TEST-johnd-lambda-api",
         "Tags": [
           {
@@ -303,10 +329,7 @@ exports[`The JohndLambda stack matches the snapshot 1`] = `
                 },
                 ":lambda:path/2015-03-31/functions/",
                 {
-                  "Fn::GetAtt": [
-                    "mylambdaE03B2284",
-                    "Arn",
-                  ],
+                  "Ref": "mylambdaAliasForLambdaEFAB1AEA",
                 },
                 "/invocations",
               ],
@@ -329,10 +352,7 @@ exports[`The JohndLambda stack matches the snapshot 1`] = `
       "Properties": {
         "Action": "lambda:InvokeFunction",
         "FunctionName": {
-          "Fn::GetAtt": [
-            "mylambdaE03B2284",
-            "Arn",
-          ],
+          "Ref": "mylambdaAliasForLambdaEFAB1AEA",
         },
         "Principal": "apigateway.amazonaws.com",
         "SourceArn": {
@@ -370,10 +390,7 @@ exports[`The JohndLambda stack matches the snapshot 1`] = `
       "Properties": {
         "Action": "lambda:InvokeFunction",
         "FunctionName": {
-          "Fn::GetAtt": [
-            "mylambdaE03B2284",
-            "Arn",
-          ],
+          "Ref": "mylambdaAliasForLambdaEFAB1AEA",
         },
         "Principal": "apigateway.amazonaws.com",
         "SourceArn": {
@@ -474,14 +491,14 @@ exports[`The JohndLambda stack matches the snapshot 1`] = `
       "Type": "AWS::IAM::Role",
       "UpdateReplacePolicy": "Retain",
     },
-    "mylambdajohndlambdaapiDeployment7FEB2ACF208dba1e1bbd342ce11890e6bd05d714": {
+    "mylambdajohndlambdaapiDeployment7FEB2ACFd2886bf400fc90058e153c79e9d2d513": {
       "DependsOn": [
         "mylambdajohndlambdaapiproxyANY96FE1B08",
         "mylambdajohndlambdaapiproxyAC91C370",
         "mylambdajohndlambdaapiANY531D7241",
       ],
       "Properties": {
-        "Description": "This is an example API",
+        "Description": "This is an example AAAAPI DEVDEV",
         "RestApiId": {
           "Ref": "mylambdajohndlambdaapi14D1279D",
         },
@@ -494,7 +511,7 @@ exports[`The JohndLambda stack matches the snapshot 1`] = `
       ],
       "Properties": {
         "DeploymentId": {
-          "Ref": "mylambdajohndlambdaapiDeployment7FEB2ACF208dba1e1bbd342ce11890e6bd05d714",
+          "Ref": "mylambdajohndlambdaapiDeployment7FEB2ACFd2886bf400fc90058e153c79e9d2d513",
         },
         "RestApiId": {
           "Ref": "mylambdajohndlambdaapi14D1279D",
@@ -561,10 +578,7 @@ exports[`The JohndLambda stack matches the snapshot 1`] = `
                 },
                 ":lambda:path/2015-03-31/functions/",
                 {
-                  "Fn::GetAtt": [
-                    "mylambdaE03B2284",
-                    "Arn",
-                  ],
+                  "Ref": "mylambdaAliasForLambdaEFAB1AEA",
                 },
                 "/invocations",
               ],
@@ -584,10 +598,7 @@ exports[`The JohndLambda stack matches the snapshot 1`] = `
       "Properties": {
         "Action": "lambda:InvokeFunction",
         "FunctionName": {
-          "Fn::GetAtt": [
-            "mylambdaE03B2284",
-            "Arn",
-          ],
+          "Ref": "mylambdaAliasForLambdaEFAB1AEA",
         },
         "Principal": "apigateway.amazonaws.com",
         "SourceArn": {
@@ -625,10 +636,7 @@ exports[`The JohndLambda stack matches the snapshot 1`] = `
       "Properties": {
         "Action": "lambda:InvokeFunction",
         "FunctionName": {
-          "Fn::GetAtt": [
-            "mylambdaE03B2284",
-            "Arn",
-          ],
+          "Ref": "mylambdaAliasForLambdaEFAB1AEA",
         },
         "Principal": "apigateway.amazonaws.com",
         "SourceArn": {
